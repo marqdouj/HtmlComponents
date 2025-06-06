@@ -2,7 +2,8 @@
 - This is a collection of custom Html components I find useful. 
 
 ## Demo
-- The 'Sandbox' project contains a demo on using the components
+- The local 'Sandbox' project contains a demo on using the components
+- A demo of this and some of my other NuGet packages can be found [here](https://github.com/marqdouj/BlazorSandbox)
 
 ## NuGet Package
 - https://www.nuget.org/packages/Marqdouj.HtmlComponents/
