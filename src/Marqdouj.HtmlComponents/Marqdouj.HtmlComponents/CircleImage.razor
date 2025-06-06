@@ -1,0 +1,19 @@
+﻿<img src="@Source" alt="Circle Image" style="@style">
+
+@code {
+    private string style => $"width:{Width};height:{Height};border-radius:50%;object-fit:cover;overflow:hidden;vertical-align:{VerticalAlign};";
+
+    [Parameter]
+    public string Height { get; set; } = "32px";
+    [Parameter, EditorRequired]
+    public string Source { get; set; }
+
+    /// <summary>
+    /// <see cref="https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align"/>
+    /// </summary>
+    [Parameter]
+    public string VerticalAlign { get; set; } = "middle";
+
+    [Parameter]
+    public string Width { get; set; } = "32px";
+}
