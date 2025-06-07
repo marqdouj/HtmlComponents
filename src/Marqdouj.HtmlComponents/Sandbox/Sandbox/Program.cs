@@ -1,5 +1,5 @@
+using Marqdouj.HtmlComponents;
 using Microsoft.FluentUI.AspNetCore.Components;
-using Sandbox.Client.Pages;
 using Sandbox.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +9,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 builder.Services.AddFluentUIComponents();
+
+builder.Services.AddScoped<IResizeObserverService, ResizeObserverService>();
 
 var app = builder.Build();
 

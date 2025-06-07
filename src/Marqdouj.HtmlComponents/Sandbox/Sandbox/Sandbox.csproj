@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Marqdouj.HtmlComponents\Marqdouj.HtmlComponents.csproj" />
     <ProjectReference Include="..\Sandbox.Client\Sandbox.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.14" />
   </ItemGroup>
