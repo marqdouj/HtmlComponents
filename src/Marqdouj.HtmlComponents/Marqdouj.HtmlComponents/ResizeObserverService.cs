@@ -10,7 +10,7 @@ namespace Marqdouj.HtmlComponents
         ValueTask UnObserve(string id);
     }
 
-    public class ResizeObserverService : IResizeObserverService
+    public class ResizeObserverService : IResizeObserverService, IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
         private readonly DotNetObjectReference<ResizeObserverService>? dotNetRef;

@@ -16,6 +16,9 @@
 - **ResizeObserverService** Scoped service to monitor html element resizing.
 
 ## Release Notes
+**8.0.2**
+- Added missing ResizeObserverService:IAsyncDisposable
+
 **8.0.1**
 - Added ResizeObserverService
   - `builder.Services.AddScoped<IResizeObserverService, ResizeObserverService>();`
