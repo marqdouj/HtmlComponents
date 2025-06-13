@@ -6,7 +6,7 @@ namespace Marqdouj.HtmlComponents
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask = new(() =>
             jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/Marqdouj.HtmlComponents/slideshow.js").AsTask());
+            "import", "./_content/Marqdouj.HtmlComponents/js/slideShow.js").AsTask());
 
         public async ValueTask Initialize()
         {

@@ -16,6 +16,10 @@
 - **ResizeObserverService** Scoped service to monitor html element resizing.
 
 ## Release Notes
+**8.0.3**
+- ResizeObserverService
+  - Add overloads for Observe/UnObserve that take a `List<string>`
+
 **8.0.2**
 - Added missing ResizeObserverService:IAsyncDisposable
 
