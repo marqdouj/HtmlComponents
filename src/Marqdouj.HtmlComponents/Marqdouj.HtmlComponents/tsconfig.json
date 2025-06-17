@@ -8,10 +8,12 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "alwaysStrict": true,
+    "strict": true
   },
-  "files": [ "scripts/resizeObserver.ts", "scripts/slideShow.ts" ],
   "compileOnSave": true,
+  "include": [ "scripts/**/*" ],
   "exclude": [
     "node_modules",
     "wwwroot"

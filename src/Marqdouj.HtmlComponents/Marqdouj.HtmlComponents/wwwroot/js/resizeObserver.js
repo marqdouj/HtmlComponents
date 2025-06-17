@@ -1,4 +1,4 @@
-var resizeObserver;
+var resizeObserver = null;
 function initialize(dotNetHelper, debug) {
     if (resizeObserver) {
         return;

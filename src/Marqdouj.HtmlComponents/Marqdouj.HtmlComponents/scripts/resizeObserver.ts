@@ -1,4 +1,4 @@
-var resizeObserver: ResizeObserver;
+var resizeObserver: ResizeObserver | null = null;
 
 function initialize(dotNetHelper: any, debug: boolean) {
     if (resizeObserver) {
@@ -40,7 +40,7 @@ export function observe(ids: string[], dotNetHelper: any, debug: boolean) {
         ids.forEach((id, index) => {
             const elem = <Element>document.getElementById(id);
             if (elem) {
-                resizeObserver.observe(elem);
+                resizeObserver!.observe(elem);
                 if (debug) {
                     console.debug(`observe element where id = '${id}'`)
                 }
@@ -57,7 +57,7 @@ export function unobserve(ids: string[], debug: boolean) {
             const elem = <Element>document.getElementById(id);
             if (elem)
             {
-                resizeObserver.unobserve(elem);
+                resizeObserver!.unobserve(elem);
                 if (debug) {
                     console.debug(`unobserve element where id = '${id}'`)
                 }
