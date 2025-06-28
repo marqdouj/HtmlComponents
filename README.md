@@ -16,6 +16,10 @@
 - **ResizeObserverService** Scoped service to monitor html element resizing.
 
 ## Release Notes
+**8.0.4**
+- ResizeObserverService
+  - Add DynamicDependency attribute to JSInvokable methods
+
 **8.0.3**
 - ResizeObserverService
   - Add overloads for Observe/UnObserve that take a `List<string>`

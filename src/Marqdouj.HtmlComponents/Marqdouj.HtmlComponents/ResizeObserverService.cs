@@ -1,5 +1,6 @@
 ﻿using Microsoft.JSInterop;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Marqdouj.HtmlComponents
 {
@@ -19,6 +20,7 @@ namespace Marqdouj.HtmlComponents
         private readonly DotNetObjectReference<ResizeObserverService>? dotNetRef;
         private readonly bool debug = Debugger.IsAttached;
 
+        [DynamicDependency(nameof(OnResized))]
         public ResizeObserverService(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
