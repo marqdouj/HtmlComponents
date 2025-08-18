@@ -16,6 +16,9 @@
 - **ResizeObserverService** Scoped service to monitor html element resizing.
 
 ## Release Notes
+**8.0.5**
+- Update NuGet pkgs
+
 **8.0.4**
 - ResizeObserverService
   - Add DynamicDependency attribute to JSInvokable methods
