@@ -10,6 +10,7 @@
 
 ## Components
 - **CircleImage**: Displays an image(photo) in a circle (i.e. Avatar).
+  - NOTE: `Fluent UI` has a [FluentPersona](https://www.fluentui-blazor.net/Persona) component that does this and more.
 - **SlideShow**: Displays a list of images (i.e. Banner/Carousel).
 
 ## Services
