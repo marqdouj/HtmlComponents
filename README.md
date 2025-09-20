@@ -16,7 +16,18 @@
 ## Services
 - **ResizeObserverService** Scoped service to monitor html element resizing.
 
+## Models
+- **UI Model**
+  - `UIModel` classes for UI presentation and binding.
+Implements a `BindValue` string property for non-string values
+where binding requires a string. Designed for use with Blazor @bind-Value.
+
+
 ## Release Notes
+**8.1.0**
+- `tsconfig.json` is no longer being distributed with the NuGet package.
+- Added `UIModel` classes.
+
 **8.0.5**
 - Update NuGet pkgs
 

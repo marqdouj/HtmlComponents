@@ -1,0 +1,85 @@
+﻿@page "/ui-model"
+@rendermode InteractiveAuto
+
+<FluentLayout>
+	<FluentHeader>UI Model</FluentHeader>
+
+	<FluentToolbar>
+		<FluentButton IconStart="@(new Icons.Regular.Size16.ArrowClockwise())" OnClick="@ResetModel" Title="Reset Model"/>
+		<FluentLabel></FluentLabel>
+	</FluentToolbar>
+
+	<FluentTabs>
+		<FluentTab Label="Grid View (Editable)">
+			<FluentGrid>
+				<FluentGridItem>
+					<FluentTextField TextFieldType="TextFieldType.Number" @bind-Value="@model.Pitch!.BindValue">
+						@model.Pitch!.NameDisplay
+					</FluentTextField>
+					<br />
+					<FluentLabel>FormatValue: @model.Pitch!.FormatValue</FluentLabel>
+				</FluentGridItem>
+
+				<FluentGridItem>
+					<FluentTextField TextFieldType="TextFieldType.Number" @bind-Value="@model.Zoom!.BindValue">
+						@model.Zoom!.NameDisplay
+					</FluentTextField>
+				</FluentGridItem>
+			</FluentGrid>
+		</FluentTab>
+
+		<FluentTab Label="DataGrid View (ReadOnly)">
+			<FluentDataGrid Items="@items?.AsQueryable()"
+							MultiLine="true"
+							ResizableColumns="true"
+							ResizeType="DataGridResizeType.Discrete"
+							GridTemplateColumns="200px 1fr"
+							GenerateHeader="GenerateHeaderOption.Sticky">
+				<PropertyColumn Property="@(p => p.NameDisplay)" Title="Name" Align="Align.Start" />
+				<PropertyColumn Property="@(p => p.FormatValue)" title="Value" Align="Align.Start" />
+			</FluentDataGrid>
+		</FluentTab>
+	</FluentTabs>
+
+</FluentLayout>
+@code {
+	private readonly MyClassModel model = new();
+	private List<IUIModelValue>? items => model.ToUIList();
+
+	protected override void OnInitialized()
+	{
+		model.Source = new MyClass { Pitch = 20.5, Zoom = 12.5 };
+	}
+
+	private void ResetModel()
+	{
+		model.Source = new MyClass { Pitch = 20.5, Zoom = 12.5 };
+	}
+
+	private class MyClassModel: UIModel<MyClass>
+	{
+		public MyClassModel()
+		{
+			var pitch = Pitch;
+			pitch?.NameAlias = "Pitch (deg.)";
+			pitch?.FormatString = "0.##";
+			pitch?.SetBindMinMax(0, 60);
+
+			Zoom?.SetBindMinMax(1, 20);
+		}
+
+		public IUIModelValue? Pitch => GetItem(nameof(MyClass.Pitch));
+		public IUIModelValue? Zoom => GetItem(nameof(MyClass.Zoom));
+	}
+
+	private class MyClass : ICloneable
+	{
+		public double? Pitch { get; set; }
+		public double? Zoom { get; set; }
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
+    }
+}

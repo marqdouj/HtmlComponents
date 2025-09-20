@@ -4,7 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>8.0.5</Version>
+    <Version>8.1.0</Version>
+	<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Custom Html Components and services</Title>
     <PackageProjectUrl>https://github.com/marqdouj/HtmlComponents</PackageProjectUrl>
@@ -17,7 +18,7 @@
     <PackageIcon>DMNuGet.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <None Include="..\..\..\DMNuGet.png">
       <Pack>True</Pack>
@@ -40,6 +41,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="tsconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  <Pack>False</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>
