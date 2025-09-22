@@ -24,6 +24,9 @@ where binding requires a string. Designed for use with Blazor @bind-Value.
 
 
 ## Release Notes
+**8.1.1**
+-  `UIModel`.`ToUIList()` method is now virtual.
+
 **8.1.0**
 - `tsconfig.json` is no longer being distributed with the NuGet package.
 - Added `UIModel` classes.

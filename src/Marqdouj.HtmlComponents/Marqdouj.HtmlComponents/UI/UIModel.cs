@@ -61,7 +61,7 @@ namespace Marqdouj.HtmlComponents.UI
         /// Creates a list of visible items, sorted by SortOrder, NameDisplay.
         /// </summary>
         /// <returns></returns>
-        public List<IUIModelValue> ToUIList()
+        public virtual List<IUIModelValue> ToUIList()
             => [.. Items.Where(e => e.Visible).OrderBy(e => e.SortOrder).ThenBy(e => e.NameDisplay)];
     }
 }
