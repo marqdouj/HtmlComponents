@@ -11,6 +11,7 @@ namespace Marqdouj.HtmlComponents.UI
         string? FormatValue { get; }
         bool IsNumerical { get; }
         PropertyInfo Property { get; }
+        bool ReadOnly { get; set; }
         void SetBindMinMax(double? min, double? max);
         object? Value { get; set; }
     }
@@ -58,7 +59,7 @@ namespace Marqdouj.HtmlComponents.UI
             get => Source != null ? Property.GetValue(Source)?.ToString() : null; 
             set
             {
-                if (Source == null || !Property.CanWrite)
+                if (Source == null || !Property.CanWrite || ReadOnly)
                     return;
 
                 var type = Property.PropertyType;
@@ -180,6 +181,11 @@ namespace Marqdouj.HtmlComponents.UI
         /// If underlying model value is nullable and the new BindValue is null, then max is ignored and the value is set to null.
         /// </summary>
         public double? BindMax { get; private set; }
+
+        /// <summary>
+        /// If true, the UI should not allow editing of the value.
+        /// </summary>
+        public bool ReadOnly { get; set; }
 
         public void SetBindMinMax(double? min, double? max)
         {

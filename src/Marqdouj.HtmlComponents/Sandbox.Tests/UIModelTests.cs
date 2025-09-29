@@ -310,6 +310,24 @@ namespace Sandbox.Tests
         }
 
         #endregion
+
+        [TestMethod]
+        public void UIModel_BindValue_ReadOnly()
+        {
+            var obj = new UIModelTestClass();
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.S))
+            {
+                FormatString = "N2",
+                Source = obj,
+                Value = "123.45678",
+                ReadOnly = true
+            };
+
+            model.BindValue = "456.789";
+            var value = model.BindValue;
+
+            Assert.AreEqual("123.45678", value);
+        }
     }
 
     internal class UIModelTestClass
