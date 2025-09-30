@@ -13,6 +13,20 @@
 		<FluentTab Label="Grid View (Editable)">
 			<FluentGrid>
 				<FluentGridItem>
+					<FluentSelect Width="150px"
+								  Height="250px"
+								  Items="@alignments"
+								  TOption="Option<string>"
+								  OptionText="@(i => i.Text)"
+								  OptionValue="@(i => i.Value)"
+								  Appearance="Appearance.Filled"
+								  @bind-Value="@model.Alignment!.BindValue" />
+
+					<br />
+					<FluentLabel>BindValue: @model.Alignment!.BindValue</FluentLabel>
+				</FluentGridItem>
+
+				<FluentGridItem>
 					<FluentTextField TextFieldType="TextFieldType.Number" @bind-Value="@model.Pitch!.BindValue">
 						@model.Pitch!.NameDisplay
 					</FluentTextField>
@@ -45,6 +59,7 @@
 @code {
 	private readonly MyClassModel model = new();
 	private List<IUIModelValue>? items => model.ToUIList();
+	private List<Option<string>> alignments = UIExtensions.GetEnumLookup<SourceAlignment>(true);
 
 	protected override void OnInitialized()
 	{
@@ -68,12 +83,20 @@
 			Zoom?.SetBindMinMax(1, 20);
 		}
 
+		public IUIModelValue? Alignment => GetItem(nameof(MyClass.Alignment));
 		public IUIModelValue? Pitch => GetItem(nameof(MyClass.Pitch));
 		public IUIModelValue? Zoom => GetItem(nameof(MyClass.Zoom));
 	}
 
+	private enum SourceAlignment
+	{
+		Viewport,
+		Map,
+	}
+
 	private class MyClass : ICloneable
 	{
+		public SourceAlignment? Alignment { get; set; }
 		public double? Pitch { get; set; }
 		public double? Zoom { get; set; }
 

@@ -112,6 +112,12 @@ namespace Marqdouj.HtmlComponents.UI
 
                 if (typeN?.IsEnum ?? false)
                 {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        Property.SetValue(Source, null);
+                        return;
+                    }
+
                     if (Enum.TryParse(typeN, value, true, out var result))
                     {
                         Property.SetValue(Source, result);
