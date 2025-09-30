@@ -25,7 +25,7 @@ where binding requires a string. Designed for use with Blazor @bind-Value.
 ## Release Notes
 **8.2.0**
 -  Removed all references to the `Microsoft.TypeScript.MSBuild` package.
-   - This package is no longer being used and was causing build issues when a consuming RCL project also referenced this package.
+   - This package is no longer being used and was causing build issues when a RCL project also referenced this package.
 
 **8.1.4**
 -  `UIModelValue`.`BindValue` with Enum? property. Added missing null or empty string assignment.
