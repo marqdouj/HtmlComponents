@@ -23,7 +23,7 @@ Implements a `BindValue` string property for non-string values
 where binding requires a string. Designed for use with Blazor @bind-Value.
 
 ## Release Notes
-**8.1.2**
+**8.1.3**
 -  `UIModelValue`.`ReadOnly` property. Moved implementation to `UIValueDef`.
 
 **8.1.2**
