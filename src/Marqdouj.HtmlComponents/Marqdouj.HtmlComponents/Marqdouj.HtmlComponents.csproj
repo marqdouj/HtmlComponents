@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>8.1.2</Version>
+    <Version>8.1.3</Version>
 	<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Custom Html Components and services</Title>

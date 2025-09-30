@@ -311,6 +311,8 @@ namespace Sandbox.Tests
 
         #endregion
 
+        #region BindValue ReadOnly
+
         [TestMethod]
         public void UIModel_BindValue_ReadOnly()
         {
@@ -328,6 +330,82 @@ namespace Sandbox.Tests
 
             Assert.AreEqual("123.45678", value);
         }
+
+        #endregion
+
+        #region BindValue Enum
+
+        [TestMethod]
+        public void UIModel_BindValue_Enum_Nullable()
+        {
+            var obj = new UIModelTestClass();
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.EN))
+            {
+                Source = obj,
+            };
+            model.BindValue = UIModelTestEnum.A.ToString();
+            var valueA = model.BindValue;
+
+            model.BindValue = UIModelTestEnum.B.ToString();
+            var valueB = model.BindValue;
+
+            model.BindValue = UIModelTestEnum.C.ToString();
+            var valueC = model.BindValue;
+
+            model.BindValue = null;
+            var valueNull = model.BindValue;
+
+            model.BindValue = "";
+            var valueEmpty = model.BindValue;
+
+            Assert.AreEqual(UIModelTestEnum.A.ToString(), valueA);
+            Assert.AreEqual(UIModelTestEnum.B.ToString(), valueB);
+            Assert.AreEqual(UIModelTestEnum.C.ToString(), valueC);
+            Assert.IsNull(valueNull);
+            Assert.IsNull(valueEmpty);
+        }
+
+        [TestMethod]
+        public void UIModel_BindValue_Enum()
+        {
+            var obj = new UIModelTestClass();
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.E))
+            {
+                Source = obj,
+            };
+
+            model.BindValue = UIModelTestEnum.A.ToString();
+            var valueA = model.BindValue;
+
+            model.BindValue = UIModelTestEnum.B.ToString();
+            var valueB = model.BindValue;
+
+            model.BindValue = UIModelTestEnum.C.ToString();
+            var valueC = model.BindValue;
+
+            model.BindValue = null;
+            var valueNull = model.BindValue;
+
+            model.BindValue = "";
+            var valueEmpty = model.BindValue;
+
+            Assert.AreEqual(UIModelTestEnum.A.ToString(), valueA);
+            Assert.AreEqual(UIModelTestEnum.B.ToString(), valueB);
+            Assert.AreEqual(UIModelTestEnum.C.ToString(), valueC);
+            Assert.IsNotNull(valueNull);
+            Assert.IsNotNull(valueEmpty);
+            Assert.AreEqual(UIModelTestEnum.C.ToString(), valueNull);
+            Assert.AreEqual(UIModelTestEnum.C.ToString(), valueEmpty);
+        }
+
+        #endregion
+    }
+
+    internal enum UIModelTestEnum
+    {
+        A,
+        B,
+        C
     }
 
     internal class UIModelTestClass
@@ -335,6 +413,8 @@ namespace Sandbox.Tests
         public double D { get; set; }
         public double? DN { get; set; }
         public string S { get; set; } = "";
-        public string? SN { get; set; } 
+        public string? SN { get; set; }
+        public UIModelTestEnum E { get; set; }
+        public UIModelTestEnum? EN { get; set; }
     }
 }

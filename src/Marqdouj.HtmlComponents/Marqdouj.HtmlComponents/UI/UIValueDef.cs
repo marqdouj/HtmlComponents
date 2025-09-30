@@ -7,6 +7,7 @@
         string Name { get; }
         string? NameAlias { get; set; }
         string NameDisplay { get; }
+        bool ReadOnly { get; set; }
         int SortOrder { get; set; }
         bool Visible { get; set; }
 
@@ -66,6 +67,11 @@
         }
 
         #endregion
+
+        /// <summary>
+        /// If true, the UI should not allow editing of the value.
+        /// </summary>
+        public bool ReadOnly { get; set; }
 
         /// <summary>
         /// If sorted, normally by SortOrder, NameDisplay

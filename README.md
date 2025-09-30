@@ -24,6 +24,9 @@ where binding requires a string. Designed for use with Blazor @bind-Value.
 
 ## Release Notes
 **8.1.2**
+-  `UIModelValue`.`ReadOnly` property. Moved implementation to `UIValueDef`.
+
+**8.1.2**
 -  added `UIModelValue`.`ReadOnly` property. If true, the UI should not allow editing of the value.
 
 **8.1.1**
