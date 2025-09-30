@@ -24,7 +24,7 @@ where binding requires a string. Designed for use with Blazor @bind-Value.
 
 ## Release Notes
 **8.1.4**
--  `UIModelValue`.`BindValue` with Enum? property. Adding missing null or empty string assignment.
+-  `UIModelValue`.`BindValue` with Enum? property. Added missing null or empty string assignment.
 
 **8.1.3**
 -  `UIModelValue`.`ReadOnly` property. Moved implementation to `UIValueDef`.
