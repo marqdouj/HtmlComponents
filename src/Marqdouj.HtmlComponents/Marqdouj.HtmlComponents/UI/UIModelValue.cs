@@ -9,6 +9,7 @@ namespace Marqdouj.HtmlComponents.UI
         string? BindValue { get; set; }
         string? FormatString { get; set; }
         string? FormatValue { get; }
+        bool IsNullableValueType { get; }
         bool IsNumerical { get; }
         PropertyInfo Property { get; }
         void SetBindMinMax(double? min, double? max);
@@ -17,18 +18,24 @@ namespace Marqdouj.HtmlComponents.UI
 
     public interface IUIModelValue<TSource> : IUIModelValue where TSource : class
     {
-        
         TSource? Source { get; set; }
     }
 
     public class UIModelValue<TSource> : UIValueDef, IUIModelValue<TSource> where TSource : class
     {
+        private readonly Type pType;
+        private readonly Type? pTypeN;
+
         public UIModelValue(string propertyName) : base(propertyName)
         {
             var type = typeof(TSource);
             Property = type.GetProperty(propertyName)
                 ?? throw new ArgumentException($"PropertyInfo not found for '{type.Name}.{propertyName}'", nameof(propertyName));
             IsNumerical = Property.PropertyType.IsNumerical();
+
+            pType = Property.PropertyType;
+            pTypeN = Nullable.GetUnderlyingType(pType);
+            IsNullableValueType = pTypeN != null;
         }
 
         public UIModelValue(PropertyInfo property) : base(property.Name)
@@ -39,7 +46,16 @@ namespace Marqdouj.HtmlComponents.UI
 
             Property = property;
             IsNumerical = Property.PropertyType.IsNumerical();
+
+            pType = Property.PropertyType;
+            pTypeN = Nullable.GetUnderlyingType(pType);
+            IsNullableValueType = pTypeN != null;
         }
+
+        /// <summary>
+        /// Indicates if the underlying Property Type is a nullable value type.
+        /// </summary>
+        public bool IsNullableValueType { get; }
 
         /// <summary>
         /// Indicates if the Property Type or Underlying Type is numerical.
@@ -61,11 +77,7 @@ namespace Marqdouj.HtmlComponents.UI
                 if (Source == null || !Property.CanWrite || ReadOnly)
                     return;
 
-                var type = Property.PropertyType;
-                var typeN = Nullable.GetUnderlyingType(type);
-                var isNullable = typeN != null;
-
-                if (type == typeof(string) || typeN == typeof(string))
+                if (pType == typeof(string) || pTypeN == typeof(string))
                 {
                     Property.SetValue(Source, value);
                     return;
@@ -73,17 +85,17 @@ namespace Marqdouj.HtmlComponents.UI
 
                 if (value == null)
                 {
-                    if (isNullable)
+                    if (IsNullableValueType)
                         Property.SetValue(Source, null);
                     return;
                 }
 
-                if (type.IsClass || type.IsArray)
+                if (pType.IsClass || pType.IsArray)
                     return;
 
                 value = value.Trim();
 
-                if (type == typeof(bool))
+                if (pType == typeof(bool))
                 {
                     if (bool.TryParse(value, out var result))
                         Property.SetValue(Source, result);
@@ -91,7 +103,7 @@ namespace Marqdouj.HtmlComponents.UI
                     return;
                 }
 
-                if (typeN == typeof(bool))
+                if (pTypeN == typeof(bool))
                 {
                     if (bool.TryParse(value, out var result))
                         Property.SetValue(Source, result);
@@ -100,9 +112,9 @@ namespace Marqdouj.HtmlComponents.UI
                     return;
                 }
 
-                if (type.IsEnum)
+                if (pType.IsEnum)
                 {
-                    if (Enum.TryParse(type, value, true, out var result))
+                    if (Enum.TryParse(pType, value, true, out var result))
                     {
                         Property.SetValue(Source, result);
                     }
@@ -110,7 +122,7 @@ namespace Marqdouj.HtmlComponents.UI
                     return;
                 }
 
-                if (typeN?.IsEnum ?? false)
+                if (pTypeN?.IsEnum ?? false)
                 {
                     if (string.IsNullOrWhiteSpace(value))
                     {
@@ -118,7 +130,7 @@ namespace Marqdouj.HtmlComponents.UI
                         return;
                     }
 
-                    if (Enum.TryParse(typeN, value, true, out var result))
+                    if (Enum.TryParse(pTypeN, value, true, out var result))
                     {
                         Property.SetValue(Source, result);
                     }
@@ -126,9 +138,9 @@ namespace Marqdouj.HtmlComponents.UI
                     return;
                 }
 
-                if (type.IsNumericType() || typeN.IsNumericType())
+                if (pType.IsNumericType() || pTypeN.IsNumericType())
                 {
-                    if (isNullable && string.IsNullOrWhiteSpace(value))
+                    if (IsNullableValueType && string.IsNullOrWhiteSpace(value))
                     {
                         Property.SetValue(Source, null);
                         return;

@@ -23,6 +23,9 @@ Implements a `BindValue` string property for non-string values
 where binding requires a string. Designed for use with Blazor @bind-Value.
 
 ## Release Notes
+**8.2.1**
+-  `IUIModelValue.IsNullableValueType` property was added. Indicates if the underlying Property Type is a nullable value type.
+
 **8.2.0**
 -  Removed all references to the `Microsoft.TypeScript.MSBuild` package.
    - This package is no longer being used and was causing build issues when a RCL project also referenced this package.

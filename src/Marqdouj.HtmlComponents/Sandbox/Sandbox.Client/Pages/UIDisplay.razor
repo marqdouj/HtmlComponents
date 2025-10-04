@@ -1,4 +1,5 @@
 ﻿@page "/ui-model"
+@using Marqdouj.HtmlCommon
 @rendermode InteractiveAuto
 
 <FluentLayout>
@@ -24,6 +25,20 @@
 
 					<br />
 					<FluentLabel>BindValue: @model.Alignment!.BindValue</FluentLabel>
+				</FluentGridItem>
+
+				<FluentGridItem>
+					<FluentSelect Width="150px"
+								  Height="250px"
+								  Items="@colors"
+								  TOption="Option<string>"
+								  OptionText="@(i => i.Text)"
+								  OptionValue="@(i => i.Value)"
+								  Appearance="Appearance.Filled"
+								  @bind-Value="@model.Color!.BindValue" />
+
+					<br />
+					<FluentLabel>BindValue: @model.Color!.BindValue</FluentLabel>
 				</FluentGridItem>
 
 				<FluentGridItem>
@@ -60,10 +75,13 @@
 	private readonly MyClassModel model = new();
 	private List<IUIModelValue>? items => model.ToUIList();
 	private List<Option<string>> alignments = UIExtensions.GetEnumLookup<SourceAlignment>(true);
+	private List<Option<string>> colors = [];
 
 	protected override void OnInitialized()
 	{
 		model.Source = new MyClass { Pitch = 20.5, Zoom = 12.5 };
+		var colorNames = new HtmlColorNameCollection(true, "<default>");
+		colors = colorNames.Items.Select(e => new Option<string>() {Text = e.NameDisplay, Value = e.Value.ToString() }).ToList();
 	}
 
 	private void ResetModel()
@@ -84,6 +102,7 @@
 		}
 
 		public IUIModelValue? Alignment => GetItem(nameof(MyClass.Alignment));
+		public IUIModelValue? Color => GetItem(nameof(MyClass.Color));
 		public IUIModelValue? Pitch => GetItem(nameof(MyClass.Pitch));
 		public IUIModelValue? Zoom => GetItem(nameof(MyClass.Zoom));
 	}
@@ -97,6 +116,7 @@
 	private class MyClass : ICloneable
 	{
 		public SourceAlignment? Alignment { get; set; }
+		public HtmlColorName? Color { get; set; }
 		public double? Pitch { get; set; }
 		public double? Zoom { get; set; }
 

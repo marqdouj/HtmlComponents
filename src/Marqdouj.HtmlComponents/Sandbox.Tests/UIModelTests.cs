@@ -399,6 +399,66 @@ namespace Sandbox.Tests
         }
 
         #endregion
+
+        #region IsNullable
+
+        [TestMethod]
+        public void UIModel_IsNullable_D()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.D));
+            Assert.IsFalse(model.IsNullableValueType);
+        }
+
+        [TestMethod]
+        public void UIModel_IsNullable_DN()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.DN));
+            Assert.IsTrue(model.IsNullableValueType);
+        }
+
+        [TestMethod]
+        public void UIModel_IsNullable_S()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.S));
+            Assert.IsFalse(model.IsNullableValueType);
+        }
+
+        [TestMethod]
+        public void UIModel_IsNullable_SN()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.SN));
+            Assert.IsFalse(model.IsNullableValueType); // Should return false even though string is nullable.
+        }
+
+        [TestMethod]
+        public void UIModel_IsNullable_E()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.E));
+            Assert.IsFalse(model.IsNullableValueType);
+        }
+
+        [TestMethod]
+        public void UIModel_IsNullable_EN()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.EN));
+            Assert.IsTrue(model.IsNullableValueType);
+        }
+
+        [TestMethod]
+        public void UIModel_IsNullable_Options()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.Options));
+            Assert.IsFalse(model.IsNullableValueType);
+        }
+
+        [TestMethod]
+        public void UIModel_IsNullable_OptionsN()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.OptionsN));
+            Assert.IsFalse(model.IsNullableValueType);
+        }
+
+        #endregion
     }
 
     internal enum UIModelTestEnum
@@ -416,5 +476,12 @@ namespace Sandbox.Tests
         public string? SN { get; set; }
         public UIModelTestEnum E { get; set; }
         public UIModelTestEnum? EN { get; set; }
+        public UIModelTestOptions Options { get; set; } = new();
+        public UIModelTestOptions? OptionsN { get; set; } 
+    }
+
+    internal class UIModelTestOptions
+    {
+        public string? Name { get; set; }
     }
 }
