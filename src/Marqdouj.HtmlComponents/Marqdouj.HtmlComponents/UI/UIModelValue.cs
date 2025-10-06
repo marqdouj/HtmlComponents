@@ -152,11 +152,62 @@ namespace Marqdouj.HtmlComponents.UI
                         var okMax = BindMax == null || result <= BindMax.Value;
 
                         if (okMin && okMax)
-                            Property.SetValue(Source, result);
-                        else if (BindMin.HasValue && result <= BindMin.Value) 
-                            Property.SetValue(Source, BindMin.Value);
+                        {
+                            if (pType == typeof(double) || pTypeN == typeof(double))
+                            {
+                                Property.SetValue(Source, result);
+                            }
+                            else if (pType == typeof(int) || pTypeN == typeof(int))
+                            {
+                                Property.SetValue(Source, Convert.ToInt32(result));
+                            }
+                            else if (pType == typeof(long) || pTypeN == typeof(long))
+                            {
+                                Property.SetValue(Source, Convert.ToInt64(result));
+                            }
+                            else
+                            {
+                                Property.SetValue(Source, result);
+                            }
+                        }
+                        else if (BindMin.HasValue && result <= BindMin.Value)
+                        {
+                            if (pType == typeof(double) || pTypeN == typeof(double))
+                            {
+                                Property.SetValue(Source, BindMin.Value);
+                            }
+                            else if (pType == typeof(int) || pTypeN == typeof(int))
+                            {
+                                Property.SetValue(Source, Convert.ToInt32(BindMin.Value));
+                            }
+                            else if (pType == typeof(long) || pTypeN == typeof(long))
+                            {
+                                Property.SetValue(Source, Convert.ToInt64(BindMin.Value));
+                            }
+                            else
+                            {
+                                Property.SetValue(Source, BindMin.Value);
+                            }
+                        }
                         else if (BindMax.HasValue && result >= BindMax.Value)
-                            Property.SetValue(Source, BindMax.Value);
+                        {
+                            if (pType == typeof(double) || pTypeN == typeof(double))
+                            {
+                                Property.SetValue(Source, BindMax.Value);
+                            }
+                            else if (pType == typeof(int) || pTypeN == typeof(int))
+                            {
+                                Property.SetValue(Source, Convert.ToInt32(BindMax.Value));
+                            }
+                            else if (pType == typeof(long) || pTypeN == typeof(long))
+                            {
+                                Property.SetValue(Source, Convert.ToInt64(BindMax.Value));
+                            }
+                            else
+                            {
+                                Property.SetValue(Source, BindMax.Value);
+                            }
+                        }
                     }
 
                     return;

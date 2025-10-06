@@ -158,6 +158,159 @@ namespace Sandbox.Tests
 
         #endregion
 
+        #region FormatValue I
+
+        [TestMethod]
+        public void UIModel_FormatValue_I()
+        {
+            var obj = new UIModelTestClass { I = 123 };
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.I))
+            {
+                FormatString = "N2",
+                Source = obj
+            };
+
+            var value = model.FormatValue;
+
+            Assert.AreEqual("123.00", value);
+        }
+
+        [TestMethod]
+        public void UIModel_FormatValue_IN_WithValue()
+        {
+            var obj = new UIModelTestClass { IN = 123 };
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.IN))
+            {
+                FormatString = "N2",
+                Source = obj
+            };
+
+            var value = model.FormatValue;
+
+            Assert.AreEqual("123.00", value);
+        }
+
+        [TestMethod]
+        public void UIModel_FormatValue_IN_Null()
+        {
+            var obj = new UIModelTestClass { IN = null };
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.IN))
+            {
+                FormatString = "N2",
+                Source = obj
+            };
+
+            var value = model.FormatValue;
+
+            Assert.IsNull(value);
+        }
+
+        [TestMethod]
+        public void UIModel_FormatValue_I_NoSource()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.I))
+            {
+                FormatString = "N2",
+            };
+
+            var value = model.FormatValue;
+
+            Assert.IsNull(value);
+        }
+
+        [TestMethod]
+        public void UIModel_FormatValue_IN_NoSource()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.IN))
+            {
+                FormatString = "N2",
+            };
+
+            var value = model.FormatValue;
+
+            Assert.IsNull(value);
+        }
+
+        #endregion
+
+        #region BindValue I
+
+        [TestMethod]
+        public void UIModel_BindValue_I()
+        {
+            var obj = new UIModelTestClass();
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.I))
+            {
+                FormatString = "N2",
+                Source = obj,
+                BindValue = "123.406"
+            };
+
+            var value = model.BindValue;
+
+            Assert.AreEqual("123", value);
+        }
+
+        [TestMethod]
+        public void UIModel_BindValue_IN_WithValue()
+        {
+            var obj = new UIModelTestClass();
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.IN))
+            {
+                FormatString = "N2",
+                Source = obj,
+                BindValue = "123.406"
+            };
+
+            var value = model.BindValue;
+
+            Assert.AreEqual("123", value);
+        }
+
+        [TestMethod]
+        public void UIModel_BindValue_IN_Null()
+        {
+            var obj = new UIModelTestClass { IN = 123 };
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.IN))
+            {
+                FormatString = "N2",
+                Source = obj,
+                BindValue = null
+            };
+
+            var value = model.BindValue;
+
+            Assert.IsNull(value);
+        }
+
+        [TestMethod]
+        public void UIModel_BindValue_I_NoSource()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.I))
+            {
+                FormatString = "N2",
+            };
+
+            var value = model.BindValue;
+
+            Assert.IsNull(value);
+        }
+
+        [TestMethod]
+        public void UIModel_BindValue_IN_NoSource()
+        {
+            var model = new UIModelValue<UIModelTestClass>(nameof(UIModelTestClass.IN))
+            {
+                FormatString = "N2",
+            };
+
+            var value = model.BindValue;
+
+            Assert.IsNull(value);
+        }
+
+        #endregion
+
         #region FormatValue S
 
         [TestMethod]
@@ -472,6 +625,8 @@ namespace Sandbox.Tests
     {
         public double D { get; set; }
         public double? DN { get; set; }
+        public int I { get; set; }
+        public int? IN { get; set; }
         public string S { get; set; } = "";
         public string? SN { get; set; }
         public UIModelTestEnum E { get; set; }

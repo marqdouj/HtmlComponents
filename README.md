@@ -23,6 +23,9 @@ Implements a `BindValue` string property for non-string values
 where binding requires a string. Designed for use with Blazor @bind-Value.
 
 ## Release Notes
+**8.3.0**
+-  `IUIModelValue.BindValue`. Numeric binding was added for Int32/Int64. Now supports Double/Int32/Int64 (including Nullable types).
+
 **8.2.1**
 -  `IUIModelValue.IsNullableValueType` property was added. Indicates if the underlying Property Type is a nullable value type.
 
